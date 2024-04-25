@@ -1,12 +1,12 @@
 {
-    "name": "Movies To Watch",
+    "name": "Movies To Watch v1.4",
     "flow": [
         {
             "id": 46,
             "module": "gateway:CustomWebHook",
             "version": 1,
             "parameters": {
-                "hook": 482550,
+                "hook": 1022802,
                 "maxResults": 1
             },
             "mapper": {},
@@ -21,7 +21,7 @@
                             "data": {
                                 "editable": "true"
                             },
-                            "label": "RefreshMoviesToRent"
+                            "label": "movies to watch v1.1"
                         }
                     }
                 },
@@ -46,11 +46,11 @@
             "module": "google-sheets:filterRows",
             "version": 2,
             "parameters": {
-                "__IMTCONN__": 485161
+                "__IMTCONN__": 272191
             },
             "mapper": {
                 "from": "drive",
-                "limit": "100",
+                "limit": "120",
                 "filter": [
                     [
                         {
@@ -61,7 +61,7 @@
                 ],
                 "sheetId": "Movies",
                 "sortOrder": "asc",
-                "spreadsheetId": "1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                "spreadsheetId": "16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                 "tableFirstRow": "A1:Z1",
                 "includesHeaders": true,
                 "valueRenderOption": "FORMATTED_VALUE",
@@ -78,8 +78,7 @@
                             "label": "Select from My Drive"
                         },
                         "orderBy": {
-                            "mode": "chose",
-                            "label": "Empty"
+                            "mode": "chose"
                         },
                         "sheetId": {
                             "mode": "chose",
@@ -115,7 +114,7 @@
                                 "scoped": "true",
                                 "connection": "google"
                             },
-                            "label": "Your Connection (Your Connection)"
+                            "label": "<REPLACE>"
                         }
                     }
                 },
@@ -271,7 +270,7 @@
                     {
                         "name": "1",
                         "type": "text",
-                        "label": "Movie Title (Update) (B)"
+                        "label": "Movie Title  (Update_v1.1) (B)"
                     },
                     {
                         "name": "2",
@@ -644,6 +643,34 @@
             }
         },
         {
+            "id": 50,
+            "module": "util:FunctionSleep",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "duration": "3"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 13,
+                    "y": -320
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "duration",
+                        "type": "uinteger",
+                        "label": "Delay",
+                        "required": true,
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "id": 14,
             "module": "regexp:HTMLParser",
             "version": 1,
@@ -767,7 +794,7 @@
                 "restore": {
                     "extra": {
                         "feeder": {
-                            "label": "Text parser - Get elements from HTML"
+                            "label": "Text parser - Get elements from HTML [14]"
                         },
                         "target": {
                             "label": "Custom"
@@ -993,11 +1020,39 @@
             }
         },
         {
+            "id": 51,
+            "module": "util:FunctionSleep",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "duration": "3"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1042,
+                    "y": -587
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "duration",
+                        "type": "uinteger",
+                        "label": "Delay",
+                        "required": true,
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "id": 40,
             "module": "google-sheets:updateRow",
             "version": 2,
             "parameters": {
-                "__IMTCONN__": 485161
+                "__IMTCONN__": 272191
             },
             "mapper": {
                 "from": "drive",
@@ -1013,7 +1068,7 @@
                 },
                 "sheetId": "Movies",
                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                 "includesHeaders": true,
                 "valueInputOption": "USER_ENTERED"
             },
@@ -1029,15 +1084,13 @@
                             "label": "My Drive"
                         },
                         "mode": {
-                            "label": "Select by path"
+                            "label": "Select from the list"
                         },
                         "sheetId": {
                             "label": "Movies"
                         },
                         "spreadsheetId": {
                             "path": [
-                                "GTM SE Team",
-                                "Movies",
                                 "Movies to rent"
                             ]
                         },
@@ -1055,7 +1108,7 @@
                                         {
                                             "name": "1",
                                             "type": "text",
-                                            "label": "Movie Title (Update) (B)"
+                                            "label": "Movie Title (B)"
                                         },
                                         {
                                             "name": "2",
@@ -1174,7 +1227,7 @@
                                 "scoped": "true",
                                 "connection": "google"
                             },
-                            "label": "Your Connection (Your Connection)"
+                            "label": "<REPLACE>"
                         }
                     }
                 },
@@ -1195,7 +1248,6 @@
                         "validate": {
                             "enum": [
                                 "select",
-                                "fromAll",
                                 "map"
                             ]
                         }
@@ -1265,7 +1317,7 @@
                             {
                                 "name": "1",
                                 "type": "text",
-                                "label": "Movie Title (Update) (B)"
+                                "label": "Movie Title (B)"
                             },
                             {
                                 "name": "2",
@@ -1405,7 +1457,7 @@
                             "module": "google-sheets:updateRow",
                             "version": 2,
                             "parameters": {
-                                "__IMTCONN__": 485161
+                                "__IMTCONN__": 272191
                             },
                             "filter": {
                                 "name": "Apple",
@@ -1413,7 +1465,14 @@
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "itunes.webp",
+                                            "b": "alt=\"Apple TV\"",
+                                            "o": "text:contain"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{20.data}}",
+                                            "b": "alt=\"Apple TV Plus\"",
                                             "o": "text:contain"
                                         }
                                     ]
@@ -1427,7 +1486,7 @@
                                 },
                                 "sheetId": "Movies",
                                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
@@ -1443,15 +1502,13 @@
                                             "label": "My Drive"
                                         },
                                         "mode": {
-                                            "label": "Select by path"
+                                            "label": "Select from the list"
                                         },
                                         "sheetId": {
                                             "label": "Movies"
                                         },
                                         "spreadsheetId": {
                                             "path": [
-                                                "GTM SE Team",
-                                                "Movies",
                                                 "Movies to rent"
                                             ]
                                         },
@@ -1469,7 +1526,7 @@
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Movie Title (Update) (B)"
+                                                            "label": "Movie Title (B)"
                                                         },
                                                         {
                                                             "name": "2",
@@ -1588,7 +1645,7 @@
                                                 "scoped": "true",
                                                 "connection": "google"
                                             },
-                                            "label": "Your Connection (Your Connection)"
+                                            "label": "<REPLACE>"
                                         }
                                     }
                                 },
@@ -1609,7 +1666,6 @@
                                         "validate": {
                                             "enum": [
                                                 "select",
-                                                "fromAll",
                                                 "map"
                                             ]
                                         }
@@ -1679,7 +1735,7 @@
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Movie Title (Update) (B)"
+                                                "label": "Movie Title (B)"
                                             },
                                             {
                                                 "name": "2",
@@ -1797,7 +1853,7 @@
                             "module": "google-sheets:updateRow",
                             "version": 2,
                             "parameters": {
-                                "__IMTCONN__": 485161
+                                "__IMTCONN__": 272191
                             },
                             "filter": {
                                 "name": "Sky",
@@ -1805,7 +1861,14 @@
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "skystore.webp",
+                                            "b": "alt=\"Sky Store\"",
+                                            "o": "text:contain"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{20.data}}",
+                                            "b": "alt=\"Sky Go\"",
                                             "o": "text:contain"
                                         }
                                     ]
@@ -1819,7 +1882,7 @@
                                 },
                                 "sheetId": "Movies",
                                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
@@ -1835,15 +1898,13 @@
                                             "label": "My Drive"
                                         },
                                         "mode": {
-                                            "label": "Select by path"
+                                            "label": "Select from the list"
                                         },
                                         "sheetId": {
                                             "label": "Movies"
                                         },
                                         "spreadsheetId": {
                                             "path": [
-                                                "GTM SE Team",
-                                                "Movies",
                                                 "Movies to rent"
                                             ]
                                         },
@@ -1861,7 +1922,7 @@
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Movie Title (Update) (B)"
+                                                            "label": "Movie Title (B)"
                                                         },
                                                         {
                                                             "name": "2",
@@ -1980,7 +2041,7 @@
                                                 "scoped": "true",
                                                 "connection": "google"
                                             },
-                                            "label": "Your Connection (Your Connection)"
+                                            "label": "<REPLACE>"
                                         }
                                     }
                                 },
@@ -2001,7 +2062,6 @@
                                         "validate": {
                                             "enum": [
                                                 "select",
-                                                "fromAll",
                                                 "map"
                                             ]
                                         }
@@ -2071,7 +2131,7 @@
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Movie Title (Update) (B)"
+                                                "label": "Movie Title (B)"
                                             },
                                             {
                                                 "name": "2",
@@ -2189,15 +2249,22 @@
                             "module": "google-sheets:updateRow",
                             "version": 2,
                             "parameters": {
-                                "__IMTCONN__": 485161
+                                "__IMTCONN__": 272191
                             },
                             "filter": {
-                                "name": "Play",
+                                "name": "Paramount+",
                                 "conditions": [
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "play.webp",
+                                            "b": "alt=\"Paramount Plus\"",
+                                            "o": "text:contain"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{20.data}}",
+                                            "b": "alt=\"Paramount+ Amazon Channel\"",
                                             "o": "text:contain"
                                         }
                                     ]
@@ -2207,11 +2274,11 @@
                                 "from": "drive",
                                 "mode": "select",
                                 "values": {
-                                    "10": "Play"
+                                    "10": "Paramount+"
                                 },
                                 "sheetId": "Movies",
                                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
@@ -2219,7 +2286,7 @@
                                 "designer": {
                                     "x": 2061,
                                     "y": -432,
-                                    "name": "Play"
+                                    "name": "Paramount+"
                                 },
                                 "restore": {
                                     "expect": {
@@ -2234,8 +2301,6 @@
                                         },
                                         "spreadsheetId": {
                                             "path": [
-                                                "GTM SE Team",
-                                                "Movies",
                                                 "Movies to rent"
                                             ]
                                         },
@@ -2253,7 +2318,7 @@
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Movie Title (Update) (B)"
+                                                            "label": "Movie Title (B)"
                                                         },
                                                         {
                                                             "name": "2",
@@ -2372,7 +2437,7 @@
                                                 "scoped": "true",
                                                 "connection": "google"
                                             },
-                                            "label": "Your Connection (Your Connection)"
+                                            "label": "<REPLACE>"
                                         }
                                     }
                                 },
@@ -2463,7 +2528,7 @@
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Movie Title (Update) (B)"
+                                                "label": "Movie Title (B)"
                                             },
                                             {
                                                 "name": "2",
@@ -2581,7 +2646,7 @@
                             "module": "google-sheets:updateRow",
                             "version": 2,
                             "parameters": {
-                                "__IMTCONN__": 485161
+                                "__IMTCONN__": 272191
                             },
                             "filter": {
                                 "name": "Rakuten",
@@ -2589,7 +2654,7 @@
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "wuaki.webp",
+                                            "b": "alt=\"Rakuten TV\"",
                                             "o": "text:contain"
                                         }
                                     ]
@@ -2603,7 +2668,7 @@
                                 },
                                 "sheetId": "Movies",
                                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
@@ -2619,15 +2684,13 @@
                                             "label": "My Drive"
                                         },
                                         "mode": {
-                                            "label": "Select by path"
+                                            "label": "Select from the list"
                                         },
                                         "sheetId": {
                                             "label": "Movies"
                                         },
                                         "spreadsheetId": {
                                             "path": [
-                                                "GTM SE Team",
-                                                "Movies",
                                                 "Movies to rent"
                                             ]
                                         },
@@ -2645,7 +2708,7 @@
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Movie Title (Update) (B)"
+                                                            "label": "Movie Title (B)"
                                                         },
                                                         {
                                                             "name": "2",
@@ -2764,7 +2827,7 @@
                                                 "scoped": "true",
                                                 "connection": "google"
                                             },
-                                            "label": "Your Connection (Your Connection)"
+                                            "label": "<REPLACE>"
                                         }
                                     }
                                 },
@@ -2785,7 +2848,6 @@
                                         "validate": {
                                             "enum": [
                                                 "select",
-                                                "fromAll",
                                                 "map"
                                             ]
                                         }
@@ -2855,7 +2917,7 @@
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Movie Title (Update) (B)"
+                                                "label": "Movie Title (B)"
                                             },
                                             {
                                                 "name": "2",
@@ -2973,7 +3035,7 @@
                             "module": "google-sheets:updateRow",
                             "version": 2,
                             "parameters": {
-                                "__IMTCONN__": 485161
+                                "__IMTCONN__": 272191
                             },
                             "filter": {
                                 "name": "Netflix",
@@ -2981,22 +3043,15 @@
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "netflix.webp",
+                                            "b": "alt=\"Netflix basic with Ads\"",
                                             "o": "text:contain"
                                         }
                                     ],
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "netflixbasicwithads.webp",
+                                            "b": "alt=\"Netflix\"",
                                             "o": "text:contain"
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "a": "{{20.data}}",
-                                            "b": "netflix.jpg",
-                                            "o": "text:equal"
                                         }
                                     ]
                                 ]
@@ -3009,7 +3064,7 @@
                                 },
                                 "sheetId": "Movies",
                                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
@@ -3025,15 +3080,13 @@
                                             "label": "My Drive"
                                         },
                                         "mode": {
-                                            "label": "Select by path"
+                                            "label": "Select from the list"
                                         },
                                         "sheetId": {
                                             "label": "Movies"
                                         },
                                         "spreadsheetId": {
                                             "path": [
-                                                "GTM SE Team",
-                                                "Movies",
                                                 "Movies to rent"
                                             ]
                                         },
@@ -3051,7 +3104,7 @@
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Movie Title (Update) (B)"
+                                                            "label": "Movie Title (B)"
                                                         },
                                                         {
                                                             "name": "2",
@@ -3170,7 +3223,7 @@
                                                 "scoped": "true",
                                                 "connection": "google"
                                             },
-                                            "label": "Your Connection (Your Connection)"
+                                            "label": "<REPLACE>"
                                         }
                                     }
                                 },
@@ -3191,7 +3244,6 @@
                                         "validate": {
                                             "enum": [
                                                 "select",
-                                                "fromAll",
                                                 "map"
                                             ]
                                         }
@@ -3261,7 +3313,7 @@
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Movie Title (Update) (B)"
+                                                "label": "Movie Title (B)"
                                             },
                                             {
                                                 "name": "2",
@@ -3379,7 +3431,7 @@
                             "module": "google-sheets:updateRow",
                             "version": 2,
                             "parameters": {
-                                "__IMTCONN__": 485161
+                                "__IMTCONN__": 272191
                             },
                             "filter": {
                                 "name": "Amazon",
@@ -3387,22 +3439,22 @@
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "amazonprime.webp",
+                                            "b": "alt=\"Amazon Prime Video with Ads\"",
                                             "o": "text:contain"
                                         }
                                     ],
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "amazon.webp",
-                                            "o": "text:equal"
+                                            "b": "alt=\"Amazon Prime Video\"",
+                                            "o": "text:contain"
                                         }
                                     ],
                                     [
                                         {
                                             "a": "{{20.data}}",
-                                            "b": "https://images.justwatch.com/icon/52449539/s100/amazonprime.jpg",
-                                            "o": "text:contain:ci"
+                                            "b": "alt=\"Amazon Video\"",
+                                            "o": "text:contain"
                                         }
                                     ]
                                 ]
@@ -3415,7 +3467,7 @@
                                 },
                                 "sheetId": "Movies",
                                 "rowNumber": "{{1.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "/1QCxeSeTVWG8kMpelhV7XZZDl-cu-u8zP/15290JRW92C_4nIQUZZ0SC9paP9q3t8S3/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o",
+                                "spreadsheetId": "/16GvQmXQUE8aWHpdMakaygeIwmjnMNmDKO557yMgy1FM",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
@@ -3431,15 +3483,13 @@
                                             "label": "My Drive"
                                         },
                                         "mode": {
-                                            "label": "Select by path"
+                                            "label": "Select from the list"
                                         },
                                         "sheetId": {
                                             "label": "Movies"
                                         },
                                         "spreadsheetId": {
                                             "path": [
-                                                "GTM SE Team",
-                                                "Movies",
                                                 "Movies to rent"
                                             ]
                                         },
@@ -3457,7 +3507,7 @@
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Movie Title (Update) (B)"
+                                                            "label": "Movie Title (B)"
                                                         },
                                                         {
                                                             "name": "2",
@@ -3576,7 +3626,7 @@
                                                 "scoped": "true",
                                                 "connection": "google"
                                             },
-                                            "label": "Your Connection (Your Connection)"
+                                            "label": "<REPLACE>"
                                         }
                                     }
                                 },
@@ -3597,7 +3647,6 @@
                                         "validate": {
                                             "enum": [
                                                 "select",
-                                                "fromAll",
                                                 "map"
                                             ]
                                         }
@@ -3667,7 +3716,7 @@
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Movie Title (Update) (B)"
+                                                "label": "Movie Title (B)"
                                             },
                                             {
                                                 "name": "2",
@@ -3790,21 +3839,15 @@
             "autoCommit": true,
             "autoCommitTriggerLast": true,
             "sequential": false,
+            "slots": null,
             "confidential": false,
             "dataloss": false,
             "dlq": false,
             "freshVariables": false
         },
         "designer": {
-            "orphans": [],
-            "notes": [
-                {
-                    "id": 46,
-                    "text": "This is triggered from the Google Sheet Here https://docs.google.com/spreadsheets/d/1cQgpv-jHCXq3beRq6Vl6j5pubeKozcwBkELleVPii7o/edit#gid=0 ",
-                    "filter": false
-                }
-            ]
+            "orphans": []
         },
-        "zone": "us1.make.com"
+        "zone": "eu1.make.com"
     }
 }
